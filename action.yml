@@ -4,7 +4,7 @@ author: 'Kevin Galligan'
 inputs:
   wrongbranch:
     required: true
-    description: 'Branch you shouldh\'t be on'
+    description: 'Branch you should not be on'
     default: 'main'
   targetbranch:
     required: true
