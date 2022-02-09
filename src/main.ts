@@ -17,26 +17,22 @@ const parsePullRequestId = (githubRef:string) => {
 };
 
 async function fixPrBase(){
-    const githubToken = core.getInput("githubToken")
-    const wrongbranch = core.getInput("wrongbranch")
-    const targetbranch = core.getInput("targetbranch")
-    const octokit = github.getOctokit(githubToken)
 
+    const owner = github.context.repo.owner
+    const repo = github.context.repo.repo
     const pullRequestId = parsePullRequestId(github.context.ref);
-    const { data: pullRequest } = await octokit.rest.pulls.get({
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
-        pull_number: parseInt(pullRequestId),
-    });
 
-    if(pullRequest.base.ref == wrongbranch) {
-        octokit.rest.pulls.update({
-            owner: github.context.repo.owner,
-            repo: github.context.repo.repo,
-            pull_number: parseInt(pullRequestId),
-            base: targetbranch
+    await fetch(`http://withdbtest-env.eba-sknfy5am.us-east-1.elasticbeanstalk.com/gh/test/repo/${owner}/${repo}/${pullRequestId}`)
+        .then(response => response.json())
+        .then(data => console.log(data))
+
+        .catch(error => {
+            if (error instanceof Error) {
+                core.setFailed(error.message)
+            } else {
+                core.setFailed(error)
+            }
         })
-    }
 }
 
 run()
