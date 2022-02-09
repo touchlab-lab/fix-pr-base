@@ -1,17 +1,6 @@
 name: 'Touchlab'
 description: 'Changes the base of the PR is needed'
 author: 'Kevin Galligan'
-inputs:
-  wrongbranch:
-    required: true
-    description: 'Branch you should not be on'
-    default: 'main'
-  targetbranch:
-    required: true
-    description: 'Branch to switch to'
-  githubToken:
-    required: true
-    description: 'Token for github access'
 
 runs:
   using: 'node12'
