@@ -23,10 +23,9 @@ async function fixPrBase(){
     const repo = github.context.repo.repo
     const pullRequestId = parsePullRequestId(github.context.ref);
 
-    await fetch(`http://withdbtest-env.eba-sknfy5am.us-east-1.elasticbeanstalk.com/gh/test/repo/${owner}/${repo}/${pullRequestId}`)
+    await fetch(`http://withdbtest-env.eba-sknfy5am.us-east-1.elasticbeanstalk.com/gh/movePrBase/${owner}/${repo}/${pullRequestId}`)
         .then(response => response.json())
         .then(data => console.log(data))
-
         .catch(error => {
             if (error instanceof Error) {
                 core.setFailed(error.message)
