@@ -18,12 +18,11 @@ const parsePullRequestId = (githubRef:string) => {
 };
 
 async function fixPrBase(){
-
     const owner = github.context.repo.owner
     const repo = github.context.repo.repo
     const pullRequestId = parsePullRequestId(github.context.ref);
 
-    await fetch(`http://withdbtest-env.eba-sknfy5am.us-east-1.elasticbeanstalk.com/gh/movePrBase/${owner}/${repo}/${pullRequestId}`)
+    await fetch(`https://touchlab.dev/gh/movePrBase/${owner}/${repo}/${pullRequestId}`)
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => {
