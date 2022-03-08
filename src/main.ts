@@ -22,7 +22,7 @@ async function fixPrBase(){
     const repo = github.context.repo.repo
     const pullRequestId = parsePullRequestId(github.context.ref);
 
-    await fetch(`https://touchlab.dev/gh/movePrBase/${owner}/${repo}/${pullRequestId}`)
+    await fetch(`https://api.touchlab.dev/gh/movePrBase/${owner}/${repo}/${pullRequestId}`)
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => {
