@@ -72,7 +72,12 @@ function fixPrBase() {
         const owner = github.context.repo.owner;
         const repo = github.context.repo.repo;
         const pullRequestId = parsePullRequestId(github.context.ref);
-        yield (0, node_fetch_1.default)(`https://api.touchlab.dev/gh/movePrBase/${owner}/${repo}/${pullRequestId}`)
+        const faktorySecretKey = core.getInput('FAKTORY_SECRET_KEY');
+        yield (0, node_fetch_1.default)(`https://api.touchlab.dev/gh/movePrBase/${owner}/${repo}/${pullRequestId}`, {
+            headers: {
+                'FAKTORY_SECRET_KEY': faktorySecretKey
+            }
+        })
             .then(response => response.json())
             .then(data => console.log(data))
             .catch(error => {

@@ -1,7 +1,10 @@
 name: 'Touchlab'
 description: 'Changes the base of the PR is needed'
 author: 'Kevin Galligan'
-
+inputs:
+  FAKTORY_SECRET_KEY:
+    required: true
+    description: 'Faktory secret key'
 runs:
   using: 'node12'
   main: 'dist/index.js'

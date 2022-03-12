@@ -21,8 +21,13 @@ async function fixPrBase(){
     const owner = github.context.repo.owner
     const repo = github.context.repo.repo
     const pullRequestId = parsePullRequestId(github.context.ref);
+    const faktorySecretKey: string = core.getInput('FAKTORY_SECRET_KEY')
 
-    await fetch(`https://api.touchlab.dev/gh/movePrBase/${owner}/${repo}/${pullRequestId}`)
+    await fetch(`https://api.touchlab.dev/gh/movePrBase/${owner}/${repo}/${pullRequestId}`, {
+        headers: {
+            'FAKTORY_SECRET_KEY': faktorySecretKey
+        }
+    })
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => {
