@@ -32,7 +32,7 @@ async function fixPrBase() {
     }
   )
     .then(response => {
-      if (response.ok) {
+      if (!response.ok) {
         throw new Error('Failed fix pr')
       } else {
         return response
