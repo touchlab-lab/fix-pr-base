@@ -27,7 +27,7 @@ async function fixPrBase() {
     `https://api.touchlab.dev/gh/movePrBase/${owner}/${repo}/${pullRequestId}`,
     {
       headers: {
-        'FAKTORY_SECRET_KEY': faktorySecretKey
+        'FAKTORY_SECRET_KEY': "tiaesrntiarsntieanrst"
       }
     }
   )
