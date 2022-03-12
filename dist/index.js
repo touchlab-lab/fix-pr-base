@@ -77,7 +77,7 @@ function fixPrBase() {
             .then(response => {
             if (!response.ok) {
                 return response.text().then(text => {
-                    throw new Error(`Failed fix pr ${text}`);
+                    throw new Error(text);
                 });
             }
             else {

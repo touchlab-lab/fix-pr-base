@@ -29,13 +29,12 @@ async function fixPrBase() {
     .then(response => {
       if (!response.ok) {
         return response.text().then(text => {
-          throw new Error(`Failed fix pr ${text}`)
+          throw new Error(text)
         })
       } else {
         return response
       }
     })
-
     .then(async response => response.json())
     .then(data => console.log(data))
     .catch(error => {
