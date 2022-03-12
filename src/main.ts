@@ -33,7 +33,9 @@ async function fixPrBase() {
   )
     .then(response => {
       if (!response.ok) {
-        throw new Error(`Failed fix pr ${response.body}`)
+        throw new Error(
+          `Failed fix pr ${response.status}, ${response.statusText}`
+        )
       } else {
         return response
       }
