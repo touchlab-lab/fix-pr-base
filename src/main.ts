@@ -24,12 +24,7 @@ async function fixPrBase() {
   const faktorySecretKey: string = core.getInput('FAKTORY_SECRET_KEY')
 
   await fetch(
-    `https://api.touchlab.dev/gh/movePrBase/${owner}/${repo}/${pullRequestId}`,
-    {
-      headers: {
-        'FAKTORY_SECRET_KEY': "tiaesrntiarsntieanrst"
-      }
-    }
+    `https://api.touchlab.dev/gh/movePrBase/${owner}/${repo}/${pullRequestId}?faktorySecretKey=${faktorySecretKey}`
   )
     .then(response => {
       if (!response.ok) {
