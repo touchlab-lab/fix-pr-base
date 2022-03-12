@@ -80,7 +80,9 @@ function fixPrBase() {
         })
             .then(response => {
             if (!response.ok) {
-                throw new Error(`Failed fix pr ${response.status}, ${response.statusText}`);
+                return response.text().then(text => {
+                    throw new Error(`Failed fix pr ${text}`);
+                });
             }
             else {
                 return response;
