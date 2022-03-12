@@ -63,7 +63,7 @@ function run() {
 const parsePullRequestId = (githubRef) => {
     const result = /refs\/pull\/(\d+)\/merge/g.exec(githubRef);
     if (!result)
-        throw new Error("Reference not found.");
+        throw new Error('Reference not found.');
     const [, pullRequestId] = result;
     return pullRequestId;
 };
@@ -75,10 +75,18 @@ function fixPrBase() {
         const faktorySecretKey = core.getInput('FAKTORY_SECRET_KEY');
         yield (0, node_fetch_1.default)(`https://api.touchlab.dev/gh/movePrBase/${owner}/${repo}/${pullRequestId}`, {
             headers: {
-                'FAKTORY_SECRET_KEY': faktorySecretKey
+                FAKTORY_SECRET_KEY: faktorySecretKey
             }
         })
-            .then(response => response.json())
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed fix pr');
+            }
+            else {
+                return response;
+            }
+        })
+            .then((response) => __awaiter(this, void 0, void 0, function* () { return response.json(); }))
             .then(data => console.log(data))
             .catch(error => {
             if (error instanceof Error) {
