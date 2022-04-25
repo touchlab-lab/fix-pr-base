@@ -75,9 +75,10 @@ function fixPrBase() {
         const faktorySecretKey = core.getInput('FAKTORY_SECRET_KEY');
         const buildBranch = core.getInput('build_branch');
         const path = `https://api.touchlab.dev/gh/movePrBase/${owner}/${repo}/${pullRequestId}`;
-        const params = `faktorySecretKey=${faktorySecretKey}&buildBranch=${encodeURIComponent(buildBranch)}`;
-        yield (0, node_fetch_1.default)(`${path}?${params}`)
-            .then(response => {
+        const params = `buildBranch=${encodeURIComponent(buildBranch)}`;
+        yield (0, node_fetch_1.default)(`${path}?${params}`, {
+            headers: { "faktorySecretKey": faktorySecretKey }
+        }).then(response => {
             if (!response.ok) {
                 return response.text().then(text => {
                     throw new Error(text);
